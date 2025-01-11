@@ -56,16 +56,15 @@ public class Deletion {
             for (int i = 0; i < size; i++) {
                 Node node = queue.poll();
                 if (node != null) {
-                    System.out.println("Node found : "+node.getStore().getDataKey());
                     if (node.getPrimaryChild() != null
                             && node.getPrimaryChild().getStore().getDataKey().equals(dataKey)) {
                         node.setPrimaryChild(node.getPrimaryChild().getPrimaryChild());
                         treeRepo.save(treeNodeDOM);
-                        return "Node Deleted";
+                        return dataKey;
                     } else if (node.getPrimaryChild() == null && node.getStore().getDataKey().equals(dataKey)) {
                         node.setPrimaryChild(null);
                         treeRepo.save(treeNodeDOM);
-                        return "Node Deleted from leaf";
+                        return dataKey;
                     }
                     queue.add(node.getPrimaryChild());
                     for (Node secondary : node.getSecondaryChildren())
@@ -73,6 +72,6 @@ public class Deletion {
                 }
             }
         }
-        return "Node was not found as Primary Node";
+        return null;
     }
 }

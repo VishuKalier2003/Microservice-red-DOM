@@ -37,7 +37,7 @@ public class Initialization {
         if (temp == null) {
             treeDOM.setHead(new Node(node, true));
             treeRepo.save(treeDOM);
-            return "First Primary Child created !!";
+            return node.getDataKey();
         }
         else {
             while (temp.getPrimaryChild() != null)
@@ -45,7 +45,7 @@ public class Initialization {
             temp.setPrimaryChild(new Node(node, true));
         }
         treeRepo.save(treeDOM);
-        return "Primary Child of "+temp.getStore().getDataKey();
+        return node.getDataKey();
     }
 
     // When current node to be added is Secondary node
@@ -55,6 +55,6 @@ public class Initialization {
         queue.add(treeDOM.getHead());
         traversal.bfs(queue, treeDOM, dataKey).getSecondaryChildren().add(new Node(node, false));
         treeRepo.save(treeDOM);
-        return "Secondary Child created";
+        return node.getDataKey();
     }
 }
