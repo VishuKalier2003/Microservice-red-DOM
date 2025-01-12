@@ -27,6 +27,12 @@ public class SearchControl {
         return ResponseEntity.ok().body(traversal.searchOfTypeNodeGetResponseData(dataKey));
     }
 
+    @GetMapping("/nodeByEntry/tag")
+    public ResponseEntity<String> getTagData(@RequestParam String dataKey){
+        return ResponseEntity.ok().body(traversal.searchOfTypeNodeGetTag(dataKey));
+    }
+
+
     @GetMapping("/nodeByEntry/parent")
     public ResponseEntity<Object> getNodeParent(@RequestParam String dataKey) {
         return ResponseEntity.ok().body(traversal.searchOfTypeNodeParent(dataKey));

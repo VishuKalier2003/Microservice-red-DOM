@@ -49,6 +49,15 @@ public class Traversal {
         return searchByNode(queue, treeDOM, data);
     }
 
+    public String searchOfTypeNodeGetTag(String dataKey) {
+        NodeDOM treeDOM = treeRepo.findById("DOM").orElse(null);
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(treeDOM.getHead());
+        Node resultant = bfs(queue, treeDOM, dataKey);
+        System.out.println(resultant);
+        return resultant != null ? resultant.getStore().getTag() : null;
+    }
+
     // Using Level order traversal to print the nodes
     public List<List<DisplayNode>> levelOrder() {
         NodeDOM treeDOM = treeRepo.findById("DOM").orElse(null);
